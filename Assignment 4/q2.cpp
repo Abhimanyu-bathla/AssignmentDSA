@@ -1,6 +1,4 @@
 #include <iostream>
-#include <limits> // Required for numeric_limits
-
 using namespace std;
 
 bool isFull(int front, int rear, int maxqueue) {
@@ -16,17 +14,10 @@ void enqueue(int queue[], int &front, int &rear, int maxqueue) {
         cout << "Queue is full (Overflow)" << endl;
         return;
     }
+
     int item;
     cout << "Enter the number to be added: ";
     cin >> item;
-
-    // Input validation for the item to be enqueued
-    while (cin.fail()) {
-        cout << "Invalid input. Please enter a number: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> item;
-    }
 
     if (front == -1) {
         front = 0;
@@ -76,13 +67,6 @@ int main() {
     int maxqueue;
     cout << "Enter maximum queue size: ";
     cin >> maxqueue;
-     while (cin.fail() || maxqueue <= 0) {
-        cout << "Invalid input. Please enter a positive number for the size: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> maxqueue;
-    }
-
 
     int *queue = new int[maxqueue];
     int front = -1;
@@ -100,15 +84,6 @@ int main() {
         cout << "7. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
-
-        // This block handles bad input for the menu choice
-        if (cin.fail()) {
-            cout << "Invalid choice. Please enter a number from the menu." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            choice = 0; // Set a non-exit choice to continue the loop
-            continue;
-        }
 
         switch (choice) {
             case 1:
