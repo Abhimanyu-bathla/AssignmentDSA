@@ -1,14 +1,57 @@
 #include <iostream>
-#include <cstring>
+#include <string>
+
 using namespace std;
-#define MAX 100
-char stack[MAX];int top=-1;
-void push(char c){if(top<MAX-1)stack[++top]=c;}
-char pop(){return stack[top--];}
-int main(){
-    char s[100];
-    cin>>s;
-    int n=strlen(s);
-    for(int i=0;i<n;i++)push(s[i]);
-    while(top!=-1)cout<<pop();
+
+
+void push(char stack[], int &top, char item) {
+    top = top + 1;
+    stack[top] = item;
+}
+
+
+char pop(char stack[], int &top) {
+    char item = stack[top];
+    top = top - 1;
+    return item;
+}
+
+
+void reverseString(string &s) {
+    int n = s.length();
+    if (n == 0) {
+        return; 
+    }
+
+   
+    char *stack = new char[n];
+    int top = -1;
+
+    
+    for (int i = 0; i < n; i++) {
+        push(stack, top, s[i]);
+    }
+
+   
+    for (int i = 0; i < n; i++) {
+        s[i] = pop(stack, top);
+    }
+
+  
+    delete[] stack;
+}
+
+int main() {
+    string input_str;
+    cout << "Enter the string to reverse: ";
+    
+    getline(cin, input_str);
+
+    cout << "Original string: " << input_str << endl;
+
+    reverseString(input_str);
+
+    cout << "Reversed string: " << input_str << endl;
+
+    return 0;
 }
